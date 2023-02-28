@@ -21,7 +21,7 @@ int main(void)
 
 			if (s != e)
 			{
-				puntchar('.');
+				putchar('.');
 				putchar(' ');
 			}
 
