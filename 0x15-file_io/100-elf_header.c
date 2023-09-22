@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 void close_elf(int elf);
-oid print_magic(unsigned char *e_ident);
+void print_magic(unsigned char *e_ident);
 void print_class(unsigned char *e_ident);
 void print_data(unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
