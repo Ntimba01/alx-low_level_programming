@@ -6,12 +6,12 @@ char *create_buffer(char *file);
 void close_file(int fd);
 
 /**
- * create_buffer - Allocates 1024 bytes in a buffer
- * @file: The name of the file buffer is storing chars for.
- * Error: Memory allocation failed
- * Return: to buffer that is allocated
+ * create_buf - It allocates memory for a buffer of 1024 bytes using malloc.
+ * if memory allocation is successful by testing if the buffer pointer is NULL.
+ * @file: The error message includes the file name provided as file.
+ *
+ * Return: A pointer
  */
-
 char *create_buffer(char *file)
 {
 	char *buffer;
@@ -21,7 +21,7 @@ char *create_buffer(char *file)
 	if (buffer == NULL)
 	{
 		dprintf(STDERR_FILENO,
-			"Error: memory allocation failed to write in %s\n", file);
+			"Error: unable to write %s\n", file);
 		exit(99);
 	}
 
@@ -29,75 +29,72 @@ char *create_buffer(char *file)
 }
 
 /**
- * close_file - close fd and handle errors if the close operation fails
- * @fd: file discriptor must be closed
- * printing is "Error: Can't close fd %d,"
+ * close_file - attempts to close the file descriptor use close function
+ * @fd: integer argument fd representing the file descriptor to be closed.
  */
-
 void close_file(int fd)
 {
-	int c;
+	int redc;
 
-	c = close(fd);
+	redc = close(fd);
 
-	if (c == -1)
+	if (redc == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: failed to close fd %d\n", fd);
+		dprintf(STDERR_FILENO, "Error: unable to close fd %d\n", fd);
 		exit(100);
 	}
 }
 
 /**
- * main - the program Copies the contents of one file to the other file.
- * @argc: number of command-line arguments (argc).
- * supplied (program name, source file, and destination file)
+ * main - Copy a contant of a file to other file.
+ * @argc: arguments numbers supplied to the program.
+ * @argv: A pointers to the args array
  *
- * program name, source file, and destination file, print stderr code 97.
- * file doesn't exist, can't be read print stderr and exits with error code 98.
- * I/O errors prints an error message to stderr and exits with error code 99.
- * The maximum number of bytes read is 1024
+ * Return: 0 always successeful
  *
- * Return: (0) always success
+ * Description: incorrect argument count exit with code 97.
+ *              file doesn't exist or can't read exit with code 98.
+ *              cannot created or cannot be written  exit with code 99.
+ *              file_to or_from cannot be closed exit with code 100.
  */
-
 int main(int argc, char *argv[])
 {
-	int from, to, r, w;
+	int from, to, redr, redw;
 	char *buffer;
 
 	if (argc != 3)
 	{
-		dprintf(STDERR_FILENO, "Usage: copy file from to\n");
+		dprintf(STDERR_FILENO, "Usage: copy from_file to_file \n");
 		exit(97);
 	}
 
 	buffer = create_buffer(argv[2]);
-	r = read(from, buffer, 1024);
 	from = open(argv[1], O_RDONLY);
+	redr = read(from, buffer, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
-		if (from == -1 || r == -1)
+		if (from == -1 || redr == -1)
 		{
 			dprintf(STDERR_FILENO,
-				"Error: the file can not be read %s\n", argv[1]);
+				"Error: uable to read %s\n", argv[1]);
 			free(buffer);
 			exit(98);
 		}
 
-		w = write(to, buffer, r);
-		if (to == -1 || w == -1)
+		redw = write(to, buffer, redr);
+		if (to == -1 || redw == -1)
 		{
 			dprintf(STDERR_FILENO,
-				"Error: the file can not be writen %s\n", argv[2]);
+				"Error: unable to write to %s\n", argv[2]);
 			free(buffer);
 			exit(99);
 		}
 
-		r = read(from, buffer, 1024);
+		redr = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
-	} while (r > 0);
+	} while (redr > 0);
 
 	free(buffer);
 	close_file(from);

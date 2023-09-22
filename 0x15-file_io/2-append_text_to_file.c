@@ -15,10 +15,10 @@
  * Close the file descriptor and return success return 1
  */
 
-
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int o, w, len = 0;
+	int redo;
+	int redw, len = 0;
 
 	if (filename == NULL)
 		return (-1);
@@ -29,19 +29,13 @@ int append_text_to_file(const char *filename, char *text_content)
 			len++;
 	}
 
-	o = open(filename, O_WRONLY | O_APPEND);
-	if (o == -1)
+	redo = open(filename, O_WRONLY | O_APPEND);
+	redw = write(redo, text_content, len);
+
+	if (redo == -1 || redw == -1)
 		return (-1);
 
-	if (text_content != NULL)
-	{
-	w = write(o, text_content, len);
-	if (w == -1)
-	{
-		close(o);
-		return (-1);
-	}
-	}
-	close(o);
+	close(redo);
+
 	return (1);
 }
