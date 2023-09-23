@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * set_bit - set (change to 1) bit at index in an unsigned long integer (*n) 
+ * set_bit - set (change to 1) bit at index in an unsigned long integer (*n)
  * @n:  pointer to the unsigned long integer
  * @index: is out of range, the function returns -1 to indicate an error.
  *
