@@ -1,8 +1,8 @@
 #include "main.h"
 
-/**
- * binary_to_uint - converts a binary representation to an unsigned integer.
- * @b - unsigned integer variable dec_val to store the decimal of the binary string.
+/*
+ * binary_to_uint - unsigned int converts a binary number
+ * @b: string containing the binary number
  *
  * return: If NULL, function returns 0, indicating an error or an invalid input
  */
