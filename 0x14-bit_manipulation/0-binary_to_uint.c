@@ -2,9 +2,9 @@
 
 /**
  * binary_to_uint - converts a binary representation to an unsigned integer.
- * unsigned integer variable dec_val to store the decimal of the binary string.
+ * @b - unsigned integer variable dec_val to store the decimal of the binary string.
  *
- *  If NULL, function returns 0, indicating an error or an invalid input
+ * return: If NULL, function returns 0, indicating an error or an invalid input
  */
 
 unsigned int binary_to_uint(const char *b)
