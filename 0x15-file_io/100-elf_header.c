@@ -23,7 +23,6 @@ void close_elf(int elf);
  *
  * Description: not ELF file - exit with code 98.
  */
-
 void check_elf(unsigned char *e_ident)
 {
 	int index;
@@ -47,7 +46,6 @@ void check_elf(unsigned char *e_ident)
  *
  * Description: spaces are separected by the magic number
  */
-
 void print_magic(unsigned char *e_ident)
 {
 	int index;
@@ -69,7 +67,6 @@ void print_magic(unsigned char *e_ident)
  * print_class - class of an ELF header prints
  * @e_ident:array containing the ELF class.
  */
-
 void print_class(unsigned char *e_ident)
 {
 	printf(" Class: ");
@@ -94,7 +91,6 @@ void print_class(unsigned char *e_ident)
  * print_data - data of an ELF header prints
  * @e_ident: array containing the ELF class.
  */
-
 void print_data(unsigned char *e_ident)
 {
 	printf(" Data: ");
@@ -116,9 +112,9 @@ void print_data(unsigned char *e_ident)
 }
 
 /**
- *  * print_version - Prints the version of an ELF header.
- *   * @e_ident: A pointer to an array containing the ELF version.
- *    */
+ ** print_version - Prints the version of an ELF header.
+ ** @e_ident: A pointer to an array containing the ELF version.
+ */
 void print_version(unsigned char *e_ident)
 {
 	 printf(" Version: %d",
@@ -135,7 +131,7 @@ void print_version(unsigned char *e_ident)
 	}
 }
 
-/**
+/*
  * print_osabi - Prints the OS/ABI of an ELF header.
  * @e_ident: array containing the ELF version.
  */
@@ -190,7 +186,7 @@ void print_abi(unsigned char *e_ident)
 		e_ident[EI_ABIVERSION]);
 }
 
-/**
+/*
  * print_type - ELF header prints the file
  * @e_type: The type of ELF 
  * @e_ident: array containing the ELF class.
@@ -224,7 +220,7 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 	}
 }
 
-/**
+/*
  * print_entry - ELF header it prints the entry file
  * @e_entry: ELF entry point the address
  * @e_ident: array containing the ELF class.
@@ -274,8 +270,6 @@ void close_elf(int elf)
  * Description: If file is not ELF File or
  * the function fails - exit with code 98.
  */
-
-
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	Elf64_Ehdr *header;
